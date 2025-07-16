@@ -16,11 +16,11 @@ export default async function EventPage({ params }: Props) {
   
   await dbConnect()
   
-  const collector = await Collector.findOne({ username: collectorName })
+  const collector: any = await Collector.findOne({ username: collectorName })
   
   if (!collector || !collector.name) notFound()
 
-  const eventData = await CollectionEvent.findOne({ 
+  const eventData: any = await CollectionEvent.findOne({ 
     slug, 
     collectorId: collector._id 
   }).lean()

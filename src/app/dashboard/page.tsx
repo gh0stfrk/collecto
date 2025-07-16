@@ -32,11 +32,11 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
-  const events = await CollectionEvent.find({ 
+  const events:any = await CollectionEvent.find({ 
     collectorId: collector._id 
   }).sort({ createdAt: -1 }).lean()
 
-  const eventsWithStats = events.map(event => {
+  const eventsWithStats = events.map((event: any) => {
     const totalPayers = event.payers?.length || 0
     const paidCount = event.payers?.filter((p: any) => p.state === 'paid').length || 0
     const pendingCount = event.payers?.filter((p: any) => p.state === 'pending_verification').length || 0

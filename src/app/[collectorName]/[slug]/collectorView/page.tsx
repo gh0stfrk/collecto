@@ -38,12 +38,12 @@ export default async function CollectorViewPage({ params }: Props) {
     notFound()
   }
 
-  const event = await CollectionEvent.findOne({ 
+  const event: any = await CollectionEvent.findOne({ 
     slug, 
     collectorId: collector._id 
   }).lean()
   
-  if (!event) notFound()
+  if (!event || !event.payers) notFound()
 
   const pendingPayers: Payer[] = event.payers.filter((p: any) => p.state === 'pending_verification').map((p: any) => ({
     _id: p._id.toString(),
